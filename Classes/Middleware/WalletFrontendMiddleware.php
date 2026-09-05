@@ -292,12 +292,12 @@ final readonly class WalletFrontendMiddleware implements MiddlewareInterface
             throw new \RuntimeException('The verified credential does not contain a boolean age_over_18 claim.');
         }
 
-        if (!$this->sessionMetadataRepository->consumeBrowserToken($sessionId, 0)) {
+        if (!$this->sessionMetadataRepository->consumeBrowserToken($sessionId)) {
             throw new \RuntimeException('Wallet browser completion was already consumed concurrently.');
         }
 
         try {
-            $this->auditService->store($configuration, $session, 0, []);
+            $this->auditService->store($configuration, $session, []);
         } catch (\Throwable $auditException) {
             $this->logger->error('EUDI age-over-18 audit persistence failed: {message}', ['message' => $auditException->getMessage()]);
         }
@@ -363,12 +363,12 @@ final readonly class WalletFrontendMiddleware implements MiddlewareInterface
         Configuration $configuration,
         VerificationSession $session,
     ): ResponseInterface {
-        if (!$this->sessionMetadataRepository->consumeBrowserToken($sessionId, 0)) {
+        if (!$this->sessionMetadataRepository->consumeBrowserToken($sessionId)) {
             throw new \RuntimeException('Wallet browser completion was already consumed concurrently.');
         }
 
         try {
-            $this->auditService->store($configuration, $session, 0, []);
+            $this->auditService->store($configuration, $session, []);
         } catch (\Throwable $auditException) {
             $this->logger->error('EUDI claims-only audit persistence failed: {message}', ['message' => $auditException->getMessage()]);
         }
