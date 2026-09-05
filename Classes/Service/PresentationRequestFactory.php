@@ -7,7 +7,7 @@ namespace T3Hub\EudiWalletIntegration\Service;
 use Eudi\VerifierCore\Dcql\CredentialQuery;
 use Eudi\VerifierCore\Dcql\DcqlQuery;
 use Eudi\VerifierCore\Domain\PresentationRequest;
-use T3Hub\EudiWalletIntegration\Domain\Configuration;
+use T3Hub\EudiWalletIntegration\Domain\Model\Configuration;
 
 final readonly class PresentationRequestFactory
 {

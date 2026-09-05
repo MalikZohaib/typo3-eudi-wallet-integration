@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace T3Hub\EudiWalletIntegration\Domain;
+namespace T3Hub\EudiWalletIntegration\Domain\Model;
 
 use DateTimeImmutable;
 

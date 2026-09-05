@@ -13,10 +13,10 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use T3Hub\EudiWalletIntegration\Service\ClaimProviderInterface;
-use T3Hub\EudiWalletIntegration\Domain\Configuration;
+use T3Hub\EudiWalletIntegration\Domain\Model\Configuration;
 use T3Hub\EudiWalletIntegration\Http\FrontendEndpointUrlBuilder;
-use T3Hub\EudiWalletIntegration\Repository\ConfigurationRepository;
-use T3Hub\EudiWalletIntegration\Repository\SessionMetadataRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\ConfigurationRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\SessionMetadataRepository;
 use T3Hub\EudiWalletIntegration\Security\BrowserTokenService;
 use T3Hub\EudiWalletIntegration\Security\ReturnUrlValidator;
 use T3Hub\EudiWalletIntegration\Security\SameDeviceResponseCodeService;
@@ -26,10 +26,6 @@ use T3Hub\EudiWalletIntegration\Service\VerificationAuditService;
 use T3Hub\EudiWalletIntegration\Service\VerifierFactory;
 use T3Hub\EudiWalletIntegration\View\WalletViewRenderer;
 use TYPO3\CMS\Core\Http\RedirectResponse;
-use TYPO3\CMS\Core\Http\SetCookieBehavior;
-use TYPO3\CMS\Core\Http\SetCookieService;
-use TYPO3\CMS\Core\Session\UserSessionManager;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 final readonly class WalletFrontendMiddleware implements MiddlewareInterface
 {

@@ -21,7 +21,7 @@ use Eudi\VerifierCore\Response\DirectPostJwtResponseParser;
 use Eudi\VerifierCore\Security\X509RequestObjectSigner;
 use Psr\Http\Message\ServerRequestInterface;
 use T3Hub\EudiWalletIntegration\Configuration\ExtensionSettings;
-use T3Hub\EudiWalletIntegration\Domain\Configuration;
+use T3Hub\EudiWalletIntegration\Domain\Model\Configuration;
 use T3Hub\EudiWalletIntegration\Http\Typo3StatusListTokenFetcher;
 use T3Hub\EudiWalletIntegration\Infrastructure\DatabaseSessionStore;
 use T3Hub\EudiWalletIntegration\Security\FilePathResolver;

@@ -12,8 +12,8 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use T3Hub\EudiWalletIntegration\Http\FrontendEndpointUrlBuilder;
-use T3Hub\EudiWalletIntegration\Repository\ConfigurationRepository;
-use T3Hub\EudiWalletIntegration\Repository\SessionMetadataRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\ConfigurationRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\SessionMetadataRepository;
 use T3Hub\EudiWalletIntegration\Security\SameDeviceResponseCodeService;
 use T3Hub\EudiWalletIntegration\Service\VerifierFactory;
 

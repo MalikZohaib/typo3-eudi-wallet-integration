@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace T3Hub\EudiWalletIntegration\Repository;
+namespace T3Hub\EudiWalletIntegration\Domain\Repository;
 
 use Doctrine\DBAL\ParameterType;
-use T3Hub\EudiWalletIntegration\Domain\ClaimMapping;
-use T3Hub\EudiWalletIntegration\Domain\Configuration;
-use T3Hub\EudiWalletIntegration\Domain\TrustAnchorConfiguration;
-use T3Hub\EudiWalletIntegration\Domain\VerificationMode;
+use T3Hub\EudiWalletIntegration\Domain\Model\ClaimMapping;
+use T3Hub\EudiWalletIntegration\Domain\Model\Configuration;
+use T3Hub\EudiWalletIntegration\Domain\Model\TrustAnchorConfiguration;
+use T3Hub\EudiWalletIntegration\Domain\Model\VerificationMode;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
-final readonly class ConfigurationRepository
+final class ConfigurationRepository extends Repository
 {
     public function __construct(private ConnectionPool $connectionPool)
     {

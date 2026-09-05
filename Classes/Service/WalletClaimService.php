@@ -7,8 +7,8 @@ namespace T3Hub\EudiWalletIntegration\Service;
 use Eudi\VerifierCore\Domain\SessionStatus;
 use Psr\Http\Message\ServerRequestInterface;
 use T3Hub\EudiWalletIntegration\Service\ClaimProviderInterface;
-use T3Hub\EudiWalletIntegration\Repository\ConfigurationRepository;
-use T3Hub\EudiWalletIntegration\Repository\SessionMetadataRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\ConfigurationRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\SessionMetadataRepository;
 use T3Hub\EudiWalletIntegration\Security\BrowserTokenService;
 
 final readonly class WalletClaimService implements ClaimProviderInterface

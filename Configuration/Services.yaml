@@ -6,6 +6,8 @@ services:
 
   T3Hub\EudiWalletIntegration\:
     resource: '../Classes/*'
+    exclude:
+      - '../Classes/Domain/Model/*'
 
   Eudi\QrCode\QrCodeRendererInterface:
     class: Eudi\QrCode\SvgQrCodeRenderer

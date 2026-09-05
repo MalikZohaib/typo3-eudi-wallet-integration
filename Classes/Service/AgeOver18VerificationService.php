@@ -9,8 +9,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use T3Hub\EudiWalletIntegration\Contract\AgeOver18VerificationInterface;
 use T3Hub\EudiWalletIntegration\Domain\AgeOver18VerificationResult;
 use T3Hub\EudiWalletIntegration\Http\FrontendEndpointUrlBuilder;
-use T3Hub\EudiWalletIntegration\Repository\ConfigurationRepository;
-use T3Hub\EudiWalletIntegration\Repository\SessionMetadataRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\ConfigurationRepository;
+use T3Hub\EudiWalletIntegration\Domain\Repository\SessionMetadataRepository;
 use T3Hub\EudiWalletIntegration\Security\BrowserTokenService;
 use T3Hub\EudiWalletIntegration\Security\ReturnUrlValidator;
 

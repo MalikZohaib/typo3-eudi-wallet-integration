@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace T3Hub\EudiWalletIntegration\Repository;
+namespace T3Hub\EudiWalletIntegration\Domain\Repository;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 
