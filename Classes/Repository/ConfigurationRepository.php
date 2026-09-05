@@ -39,19 +39,11 @@ final readonly class ConfigurationRepository
             uid: (int)$row['uid'],
             title: (string)$row['title'],
             identifier: (string)$row['identifier'],
-            mode: VerificationMode::tryFrom((string)($row['mode'] ?? 'login')) ?? VerificationMode::Login,
+            mode: VerificationMode::tryFrom((string)($row['mode'])),
             credentialQueryId: (string)($row['credential_query_id'] ?: 'pid'),
             vct: (string)$row['vct'],
             purpose: trim((string)$row['purpose']) !== '' ? (string)$row['purpose'] : null,
             requireHolderBinding: (bool)$row['require_holder_binding'],
-            createMissingUsers: (bool)$row['create_missing_users'],
-            updateExistingUsers: (bool)$row['update_existing_users'],
-            userStoragePid: (int)$row['user_storage_pid'],
-            defaultUsergroup: (int)$row['default_usergroup'],
-            identityClaim: trim((string)($row['identity_claim'] ?? '')) !== '' ? trim((string)$row['identity_claim']) : null,
-            matchClaim: trim((string)$row['match_claim']) !== '' ? (string)$row['match_claim'] : null,
-            matchField: trim((string)$row['match_field']) !== '' ? (string)$row['match_field'] : null,
-            usernameClaim: trim((string)$row['username_claim']) !== '' ? (string)$row['username_claim'] : null,
             storeVerificationResult: (bool)$row['store_verification_result'],
             claimMappings: $this->getClaimMappings($uid),
             trustAnchors: $this->getTrustAnchors($uid),
@@ -63,7 +55,7 @@ final readonly class ConfigurationRepository
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tx_eudiwalletintegration_claim_mapping');
         $rows = $queryBuilder
-            ->select('claim_name', 'target_field', 'required', 'overwrite_existing')
+            ->select('claim_name','required')
             ->from('tx_eudiwalletintegration_claim_mapping')
             ->where(
                 $queryBuilder->expr()->eq('configuration', $queryBuilder->createNamedParameter($configurationUid, ParameterType::INTEGER)),
@@ -76,9 +68,7 @@ final readonly class ConfigurationRepository
 
         return array_map(static fn(array $row): ClaimMapping => new ClaimMapping(
             claimName: trim((string)$row['claim_name']),
-            targetField: trim((string)$row['target_field']) !== '' ? trim((string)$row['target_field']) : null,
             required: (bool)$row['required'],
-            overwriteExisting: (bool)$row['overwrite_existing'],
         ), $rows);
     }
 

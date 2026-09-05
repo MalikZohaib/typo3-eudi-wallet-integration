@@ -21,7 +21,6 @@ use T3Hub\EudiWalletIntegration\Security\BrowserTokenService;
 use T3Hub\EudiWalletIntegration\Security\ReturnUrlValidator;
 use T3Hub\EudiWalletIntegration\Security\SameDeviceResponseCodeService;
 use T3Hub\EudiWalletIntegration\Service\AgeOver18VerificationService;
-use T3Hub\EudiWalletIntegration\Service\FrontendUserProvisioningService;
 use T3Hub\EudiWalletIntegration\Service\PresentationRequestFactory;
 use T3Hub\EudiWalletIntegration\Service\VerificationAuditService;
 use T3Hub\EudiWalletIntegration\Service\VerifierFactory;
@@ -44,7 +43,6 @@ final readonly class WalletFrontendMiddleware implements MiddlewareInterface
         private BrowserTokenService $browserTokenService,
         private SameDeviceResponseCodeService $sameDeviceResponseCodeService,
         private ReturnUrlValidator $returnUrlValidator,
-        private FrontendUserProvisioningService $userProvisioningService,
         private VerificationAuditService $auditService,
         private ClaimProviderInterface $claimProvider,
         private WalletViewRenderer $viewRenderer,
@@ -136,7 +134,6 @@ final readonly class WalletFrontendMiddleware implements MiddlewareInterface
                 'configuration' => $configuration,
                 'requestedClaims' => $configuration->requestedClaims(),
                 'mode' => $configuration->mode->value,
-                'loginMode' => $configuration->isLoginMode(),
                 'ageOver18Mode' => $configuration->isAgeOver18Mode(),
                 'session' => $session,
                 'qrCodeDataUri' => $this->verifierFactory->qrCodeDataUri($authorizationUri),
@@ -277,31 +274,6 @@ final readonly class WalletFrontendMiddleware implements MiddlewareInterface
                 return $this->finishAgeOver18($sessionId, $metadata, $configuration, $session);
             }
 
-            $provisioned = $this->userProvisioningService->provision($configuration, $session->result);
-            $feUserUid = $provisioned['uid'];
-            if (!$this->sessionMetadataRepository->consumeBrowserToken($sessionId, $feUserUid)) {
-                throw new \RuntimeException('Wallet browser completion was already consumed concurrently.');
-            }
-            try {
-                $this->auditService->store($configuration, $session, $feUserUid, $provisioned['mappedFields']);
-            } catch (\Throwable $auditException) {
-                $this->logger->error('EUDI verification audit persistence failed: {message}', ['message' => $auditException->getMessage()]);
-            }
-
-            $frontendUser = $request->getAttribute('frontend.user');
-            if (!$frontendUser instanceof FrontendUserAuthentication) {
-                throw new \RuntimeException('TYPO3 frontend-user authentication context is unavailable.');
-            }
-            $sessionManager = UserSessionManager::create('FE');
-            $newFrontendSession = $sessionManager->elevateToFixatedUserSession($frontendUser->getSession(), $feUserUid, false);
-            $response = new RedirectResponse((string)$metadata['return_url'], 303);
-            $normalizedParams = $request->getAttribute('normalizedParams');
-            return SetCookieService::create($frontendUser->name, $frontendUser->loginType)->applyCookieToResponse(
-                $response,
-                $newFrontendSession,
-                SetCookieBehavior::Send,
-                $normalizedParams,
-            );
         } catch (\Throwable $exception) {
             $this->logger->warning('EUDI wallet completion failed: {message}', ['message' => $exception->getMessage()]);
             return $this->renderError($request, 'Wallet verification could not be completed.', 400);

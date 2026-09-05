@@ -15,7 +15,7 @@ final readonly class VerificationAuditService
     }
 
     /** @param array<string, scalar|null> $mappedFields */
-    public function store(Configuration $configuration, VerificationSession $session, int $feUserUid, array $mappedFields): void
+    public function store(Configuration $configuration, VerificationSession $session, array $mappedFields): void
     {
         if (!$configuration->storeVerificationResult || $session->result === null) {
             return;
@@ -26,7 +26,6 @@ final readonly class VerificationAuditService
             [
                 'session_id' => $session->id,
                 'configuration_uid' => $configuration->uid,
-                'fe_user_uid' => $feUserUid,
                 'verified_at' => $session->result->verifiedAt->getTimestamp(),
                 'issuer' => $credential?->issuer ?? '',
                 'subject' => $credential?->subject ?? '',

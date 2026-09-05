@@ -13,14 +13,6 @@ CREATE TABLE tx_eudiwalletintegration_configuration (
     vct varchar(255) NOT NULL DEFAULT '',
     purpose text,
     require_holder_binding smallint unsigned NOT NULL DEFAULT 1,
-    create_missing_users smallint unsigned NOT NULL DEFAULT 0,
-    update_existing_users smallint unsigned NOT NULL DEFAULT 1,
-    user_storage_pid int unsigned NOT NULL DEFAULT 0,
-    default_usergroup int unsigned NOT NULL DEFAULT 0,
-    identity_claim varchar(255) NOT NULL DEFAULT '',
-    match_claim varchar(255) NOT NULL DEFAULT '',
-    match_field varchar(80) NOT NULL DEFAULT '',
-    username_claim varchar(255) NOT NULL DEFAULT '',
     store_verification_result smallint unsigned NOT NULL DEFAULT 0,
     PRIMARY KEY (uid),
     KEY parent (pid),
@@ -38,9 +30,7 @@ CREATE TABLE tx_eudiwalletintegration_claim_mapping (
     configuration int unsigned NOT NULL DEFAULT 0,
     sorting int unsigned NOT NULL DEFAULT 0,
     claim_name varchar(255) NOT NULL DEFAULT '',
-    target_field varchar(80) NOT NULL DEFAULT '',
     required smallint unsigned NOT NULL DEFAULT 1,
-    overwrite_existing smallint unsigned NOT NULL DEFAULT 1,
     PRIMARY KEY (uid),
     KEY parent (pid),
     KEY configuration (configuration)
@@ -84,7 +74,6 @@ CREATE TABLE tx_eudiwalletintegration_session (
     response_code_consumed smallint unsigned NOT NULL DEFAULT 0,
     return_url text,
     return_mode varchar(32) NOT NULL DEFAULT 'page',
-    fe_user_uid int unsigned NOT NULL DEFAULT 0,
     created_at int unsigned NOT NULL DEFAULT 0,
     expires_at int unsigned NOT NULL DEFAULT 0,
     updated_at int unsigned NOT NULL DEFAULT 0,
@@ -95,36 +84,4 @@ CREATE TABLE tx_eudiwalletintegration_session (
     KEY status (status),
     KEY configuration_uid (configuration_uid),
     KEY expires_at (expires_at)
-);
-
-CREATE TABLE tx_eudiwalletintegration_identity (
-    uid int unsigned NOT NULL auto_increment,
-    identity_hash char(64) NOT NULL DEFAULT '',
-    fe_user_uid int unsigned NOT NULL DEFAULT 0,
-    issuer varchar(500) NOT NULL DEFAULT '',
-    subject varchar(500) NOT NULL DEFAULT '',
-    identity_source varchar(300) NOT NULL DEFAULT '',
-    credential_type varchar(500) NOT NULL DEFAULT '',
-    created_at int unsigned NOT NULL DEFAULT 0,
-    last_verified_at int unsigned NOT NULL DEFAULT 0,
-    PRIMARY KEY (uid),
-    UNIQUE KEY wallet_identity (identity_hash),
-    KEY fe_user_uid (fe_user_uid)
-);
-
-CREATE TABLE tx_eudiwalletintegration_verification (
-    uid int unsigned NOT NULL auto_increment,
-    session_id varchar(80) NOT NULL DEFAULT '',
-    configuration_uid int unsigned NOT NULL DEFAULT 0,
-    fe_user_uid int unsigned NOT NULL DEFAULT 0,
-    verified_at int unsigned NOT NULL DEFAULT 0,
-    issuer varchar(500) NOT NULL DEFAULT '',
-    subject varchar(500) NOT NULL DEFAULT '',
-    credential_type varchar(500) NOT NULL DEFAULT '',
-    claims_json mediumtext,
-    mapped_fields_json text,
-    PRIMARY KEY (uid),
-    KEY session_id (session_id),
-    KEY configuration_uid (configuration_uid),
-    KEY fe_user_uid (fe_user_uid)
 );

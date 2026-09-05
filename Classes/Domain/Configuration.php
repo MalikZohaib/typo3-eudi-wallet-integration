@@ -19,23 +19,10 @@ final readonly class Configuration
         public string $vct,
         public ?string $purpose,
         public bool $requireHolderBinding,
-        public bool $createMissingUsers,
-        public bool $updateExistingUsers,
-        public int $userStoragePid,
-        public int $defaultUsergroup,
-        public ?string $identityClaim,
-        public ?string $matchClaim,
-        public ?string $matchField,
-        public ?string $usernameClaim,
         public bool $storeVerificationResult,
         public array $claimMappings,
         public array $trustAnchors,
     ) {
-    }
-
-    public function isLoginMode(): bool
-    {
-        return $this->mode === VerificationMode::Login;
     }
 
     public function isClaimsOnlyMode(): bool
@@ -62,16 +49,6 @@ final readonly class Configuration
         foreach ($this->claimMappings as $mapping) {
             if ($mapping->claimName !== '') {
                 $claims[] = $mapping->claimName;
-            }
-        }
-
-        // Account-matching/username claims are login concerns only. A claims-only
-        // verification must not silently request additional identity attributes.
-        if ($this->isLoginMode()) {
-            foreach ([$this->identityClaim, $this->matchClaim, $this->usernameClaim] as $claim) {
-                if (is_string($claim) && $claim !== '') {
-                    $claims[] = $claim;
-                }
             }
         }
 

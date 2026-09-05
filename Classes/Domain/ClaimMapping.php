@@ -8,9 +8,7 @@ final readonly class ClaimMapping
 {
     public function __construct(
         public string $claimName,
-        public ?string $targetField,
         public bool $required,
-        public bool $overwriteExisting,
     ) {
     }
 }
