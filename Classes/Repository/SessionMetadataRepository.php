@@ -130,14 +130,13 @@ final readonly class SessionMetadataRepository
         ) === 1;
     }
 
-    public function consumeBrowserToken(string $sessionId, int $feUserUid): bool
+    public function consumeBrowserToken(string $sessionId): bool
     {
         $connection = $this->connectionPool->getConnectionForTable('tx_eudiwalletintegration_session');
         return $connection->update(
             'tx_eudiwalletintegration_session',
             [
                 'browser_consumed' => 1,
-                'fe_user_uid' => $feUserUid,
                 'updated_at' => time(),
             ],
             [

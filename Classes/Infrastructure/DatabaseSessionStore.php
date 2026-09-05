@@ -31,7 +31,6 @@ final readonly class DatabaseSessionStore implements SessionStoreInterface
                 'browser_token_hash' => '',
                 'browser_consumed' => 0,
                 'return_url' => '',
-                'fe_user_uid' => 0,
                 'created_at' => $session->createdAt->getTimestamp(),
                 'expires_at' => $session->expiresAt->getTimestamp(),
                 'updated_at' => $now,
