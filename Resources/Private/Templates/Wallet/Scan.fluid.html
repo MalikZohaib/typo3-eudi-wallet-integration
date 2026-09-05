@@ -1,0 +1,51 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="Main">
+    <main class="eudi-wallet" data-eudi-wallet-scan data-status-url="{statusUrl}" data-finish-url="{finishUrl}">
+        <f:if condition="{loginMode}">
+            <f:then>
+                <h1>Login with your EUDI Wallet</h1>
+                <p>Scan this QR code with your wallet and approve the requested information to continue your login.</p>
+            </f:then>
+            <f:else>
+                <f:if condition="{ageOver18Mode}">
+                    <f:then>
+                        <h1>Verify that you are over 18</h1>
+                        <p>Scan this QR code with your wallet. Only the age_over_18 verification claim is requested.</p>
+                    </f:then>
+                    <f:else>
+                        <h1>Verify with your EUDI Wallet</h1>
+                        <p>Scan this QR code with your wallet and approve the requested information.</p>
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+
+        <figure>
+            <img src="{qrCodeDataUri}" alt="QR code for EUDI Wallet verification" width="320" height="320" />
+        </figure>
+
+        <h2>Requested claims</h2>
+        <ul>
+            <f:for each="{requestedClaims}" as="claim">
+                <li>{claim}</li>
+            </f:for>
+        </ul>
+
+        <p><a href="{openWalletUrl}">Open wallet on this device</a></p>
+        <p role="status" aria-live="polite" data-eudi-wallet-status>Waiting for wallet response…</p>
+        <noscript>Please enable JavaScript to automatically continue after approving the wallet request.</noscript>
+
+        <details>
+            <summary>Debug: Authorization Request URI</summary>
+
+            <textarea
+                readonly
+                style="width:100%; min-height:120px;"
+            >{authorizationRequestUri}</textarea>
+        </details>
+
+    </main>
+    <script type="module" src="{f:uri.resource(path: 'JavaScript/scan.js', extensionName: 'EudiWalletIntegration')}"></script>
+</f:section>
+</html>

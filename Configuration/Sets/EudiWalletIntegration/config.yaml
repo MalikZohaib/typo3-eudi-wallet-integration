@@ -1,0 +1,4 @@
+name: t3hub/eudi-wallet-integration
+label: 'EUDI Wallet Integration'
+dependencies:
+  - typo3/felogin

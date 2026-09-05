@@ -1,0 +1,24 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  T3Hub\EudiWalletIntegration\:
+    resource: '../Classes/*'
+
+  T3Hub\EudiWalletIntegration\EventListener\ModifyFeloginViewListener:
+    tags:
+      - name: event.listener
+        identifier: 't3hub/eudi-wallet-integration/felogin-view'
+        event: TYPO3\CMS\FrontendLogin\Event\ModifyLoginFormViewEvent
+
+  Eudi\QrCode\QrCodeRendererInterface:
+    class: Eudi\QrCode\SvgQrCodeRenderer
+
+  T3Hub\EudiWalletIntegration\Contract\AgeOver18VerificationInterface:
+    alias: T3Hub\EudiWalletIntegration\Service\AgeOver18VerificationService
+
+  T3Hub\EudiWalletIntegration\Service\ClaimProviderInterface:
+    alias:
+      T3Hub\EudiWalletIntegration\Service\WalletClaimService

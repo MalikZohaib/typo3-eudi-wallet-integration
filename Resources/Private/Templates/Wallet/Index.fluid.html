@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{configurationUid} && {configuration}">
+    <f:then>
+        <f:if condition="{loginMode}">
+            <f:then>
+                <a class="eudi-wallet-login-button" href="{startUrl}">Login with EUDI Wallet</a>
+            </f:then>
+            <f:else>
+                <f:if condition="{ageOver18Mode}">
+                    <f:then>
+                        <a class="eudi-wallet-login-button" href="{startUrl}">Verify that I am over 18</a>
+                    </f:then>
+                    <f:else>
+                        <a class="eudi-wallet-login-button" href="{startUrl}">Verify with EUDI Wallet</a>
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+    </f:then>
+    <f:else>
+        <p>EUDI Wallet verification is not configured for this content element.</p>
+    </f:else>
+</f:if>
+</html>

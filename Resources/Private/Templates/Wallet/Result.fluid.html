@@ -1,0 +1,35 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="Main">
+    <main class="eudi-wallet eudi-wallet-result">
+        <h1>Wallet verification successful</h1>
+        <p>The wallet presentation was cryptographically verified. No TYPO3 frontend login was created.</p>
+
+        <f:if condition="{credential}">
+            <dl class="eudi-wallet-credential-meta">
+                <dt>Issuer</dt>
+                <dd>{credential.issuer}</dd>
+                <dt>Credential type</dt>
+                <dd>{credential.credentialType}</dd>
+            </dl>
+        </f:if>
+
+        <h2>Verified claims</h2>
+        <f:if condition="{claimRows}">
+            <f:then>
+                <dl class="eudi-wallet-claims">
+                    <f:for each="{claimRows}" as="claim">
+                        <dt>{claim.name}</dt>
+                        <dd>{claim.value}</dd>
+                    </f:for>
+                </dl>
+            </f:then>
+            <f:else>
+                <p>No claims were returned.</p>
+            </f:else>
+        </f:if>
+
+        <p><a href="{returnUrl}">Continue</a></p>
+    </main>
+</f:section>
+</html>

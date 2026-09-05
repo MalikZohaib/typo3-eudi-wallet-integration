@@ -1,0 +1,18 @@
+plugin.tx_eudiwalletintegrationintegration_walletlogin {
+    view {
+        templateRootPaths {
+            10 = EXT:eudi_wallet_integration/Resources/Private/Templates/
+            20 = {$eudiWalletIntegration.view.templateRootPath}
+        }
+        partialRootPaths {
+            10 = EXT:eudi_wallet_integration/Resources/Private/Partials/
+            20 = {$eudiWalletIntegration.view.partialRootPath}
+        }
+        layoutRootPaths {
+            10 = EXT:eudi_wallet_integration/Resources/Private/Layouts/
+            20 = {$eudiWalletIntegration.view.layoutRootPath}
+        }
+    }
+}
+
+config.contentObjectExceptionHandler = 0

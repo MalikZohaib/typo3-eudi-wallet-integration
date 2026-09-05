@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+  <file source-language="en" datatype="plaintext" original="messages" date="2026-08-20T00:00:00Z">
+    <body>
+      <trans-unit id="plugin.walletLogin.title"><source>EUDI Wallet Verification</source></trans-unit>
+      <trans-unit id="plugin.walletLogin.description"><source>Starts an EUDI Wallet presentation for claims-only verification or frontend login, depending on the selected configuration.</source></trans-unit>
+    </body>
+  </file>
+</xliff>

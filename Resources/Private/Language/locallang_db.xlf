@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+  <file source-language="en" datatype="plaintext" original="messages" date="2026-08-20T00:00:00Z">
+    <body>
+      <trans-unit id="configuration"><source>EUDI Wallet configuration</source></trans-unit>
+      <trans-unit id="tt_content.configuration"><source>EUDI Wallet configuration</source></trans-unit>
+    </body>
+  </file>
+</xliff>

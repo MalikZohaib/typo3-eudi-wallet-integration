@@ -1,0 +1,26 @@
+categories:
+  eudiWalletIntegration:
+    label: 'EUDI Wallet'
+  eudiWalletIntegration.templates:
+    label: 'Templates'
+    parent: eudiWalletIntegration
+
+settings:
+  eudiWalletIntegration.view.templateRootPath:
+    label: 'EUDI Wallet: Template root path'
+    category: eudiWalletIntegration.templates
+    description: 'Override the default QR / wallet scan templates.'
+    type: string
+    default: 'EXT:eudi_wallet_integration/Resources/Private/Templates/'
+
+  eudiWalletIntegration.view.partialRootPath:
+    label: 'EUDI Wallet: Partial root path'
+    category: eudiWalletIntegration.templates
+    type: string
+    default: 'EXT:eudi_wallet_integration/Resources/Private/Partials/'
+
+  eudiWalletIntegration.view.layoutRootPath:
+    label: 'EUDI Wallet: Layout root path'
+    category: eudiWalletIntegration.templates
+    type: string
+    default: 'EXT:eudi_wallet_integration/Resources/Private/Layouts/'

@@ -1,0 +1,28 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:eudi="http://typo3.org/ns/T3Hub/EudiWalletIntegration/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<div
+    class="eudi-wallet-verification"
+    data-eudi-wallet
+    data-eudi-configuration="{element.properties.eudiConfiguration}"
+    data-eudi-start-url="/eudi-wallet/start"
+    data-eudi-result-url="/eudi-wallet/claims"
+    data-eudi-claims="{eudi:EudiClaimMappings(element: element)}"
+>
+    <button
+        type="button"
+        class="eudi-wallet-verify-button"
+    >
+        {element.properties.buttonLabel}
+    </button>
+
+    <div
+        data-eudi-wallet-status
+        aria-live="polite"
+    ></div>
+</div>
+<script type="module" src="{f:uri.resource(path: 'JavaScript/eudi-form.js', extensionName: 'EudiWalletIntegration')}"></script>
+</html>

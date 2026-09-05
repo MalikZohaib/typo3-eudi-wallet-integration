@@ -1,0 +1,39 @@
+# cat=EUDI Wallet/100; type=string; label=Public verifier base URL:Public HTTPS origin reachable by the wallet, for example https://verifier.example.com. Leave empty only if the TYPO3 site base is externally reachable.
+publicBaseUrl =
+
+# cat=EUDI Wallet/110; type=string; label=OpenID4VP client_id:Leave empty to derive x509_hash:<SHA-256 leaf certificate> automatically from the configured certificate chain.
+clientId =
+
+# cat=EUDI Wallet/120; type=string; label=Wallet authorization endpoint:Wallet invocation URI base, for example haip-vp:// or a wallet-specific OpenID4VP scheme.
+walletAuthorizationEndpoint = haip-vp://
+
+# cat=EUDI Wallet/130; type=options[get,post]; label=request_uri_method
+requestUriMethod = get
+
+# cat=EUDI Wallet/140; type=options[direct_post.jwt,direct_post]; label=response_mode:HAIP 1.0 redirect presentation requires direct_post.jwt.
+responseMode = direct_post.jwt
+
+# cat=EUDI Wallet/150; type=options[haip_1_0,openid4vp]; label=Protocol profile:Use haip_1_0 for the HAIP 1.0 redirect profile.
+profile = haip_1_0
+
+# cat=EUDI Wallet/160; type=int+; label=Verification session TTL in seconds
+sessionTtlSeconds = 300
+
+
+# cat=EUDI Wallet/170; type=int+; label=Expired session retention in seconds:Expired database verification sessions older than this retention window can be removed by the eudi-wallet:cleanup command.
+sessionRetentionSeconds = 86400
+
+# cat=Relying Party Credentials/200; type=string; label=Private key path:Absolute path or EXT: path. Must be outside the public web root.
+requestPrivateKeyPath =
+
+# cat=Relying Party Credentials/210; type=string; label=Certificate chain path:PEM file containing the leaf certificate first, followed by any intermediate certificates. Absolute path or EXT: path. Must be outside the public web root.
+requestCertificateChainPath =
+
+# cat=Relying Party Credentials/220; type=options[ES256,RS256]; label=Request signing algorithm
+requestSigningAlgorithm = ES256
+
+# cat=Frontend Login/300; type=boolean; label=Add EUDI Wallet login to felogin
+feloginEnabled = 1
+
+# cat=Frontend Login/310; type=int+; label=Default EUDI configuration UID for felogin
+feloginConfigurationUid = 0
